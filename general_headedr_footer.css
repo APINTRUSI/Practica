@@ -1,0 +1,231 @@
+/* 
+Quicksan
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+Lato
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+*/
+
+/*ADLaM Display*/
+@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Arima:wght@100..700&family=Laila:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --background-color: #fde6bc;
+  --side-bg-color: #FFEDBA;
+  --another-yellow: #FFE082;
+  --buttons-color: #F9C25A;
+  --text-color: #643515;
+  --orange: #D4750F;
+  --yellow: #DBAB26;
+  --font-main: ADLaM Display;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--font-main);
+    color: var(--text-color);
+}
+
+body{
+    background-color: var(--background-color);
+}
+
+
+
+/* Header Bar */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 50px;
+  flex-wrap: wrap;
+}
+
+/* Logo Section */
+#logo {
+  display: flex;
+  align-items: center;
+  height: 71px;
+  width: auto;
+  /* gap: 10px; */
+}
+
+/* Navigation Menu */
+.nav-menu ul {
+  font-size: 25px;
+  display: flex;
+  gap: 50px;
+  list-style: none;
+}
+
+.nav-menu a {
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.nav-menu .phone {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Actions */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.actions a i {
+  font-size: 25px;         /* controlează dimensiunea reală a iconiței */
+  width: 30px;             /* asigură lățimea containerului */
+  height: 30px;            /* asigură înălțimea */
+  display: inline-flex;    /* face ca iconița să se alinieze frumos */
+  justify-content: center;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+
+
+.login-btn {
+  background-color: var(--buttons-color);
+  border: none;
+  font-size: 25px;
+  height: 41px;
+  width: 126px;
+  border-radius: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+footer{
+    padding-top: 30px;
+    padding-bottom: 40px;
+    background-image: linear-gradient(var(--background-color), #F8BF51);
+
+}
+
+.footer_info{
+    display: grid;
+    justify-content: center;
+    align-content: space-evenly;
+    margin-bottom: 15px;
+}
+
+
+.text h1{
+    font-size: 22px;
+    margin: 0px;
+}
+.text h6{
+    font-size: 11px;
+    margin: 0px;
+    opacity: 0.7;
+}
+
+
+
+
+footer h4{
+    font-size: 15px;
+    align-self: center;
+    justify-self: center;
+    font-weight: lighter;
+    margin: 0px;
+}
+.final{
+    display: flex;
+    gap: 255px;
+    justify-content: center;
+    align-items: center;
+}
+
+.newsletter{
+  gap: 10px;
+}
+
+
+
+#foloow{
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.social-icons a {
+  position: relative;
+  display: inline-block;
+  width: auto;
+  height: 40px;
+}
+
+.social-icons img {
+  width: 100%;
+  height: 100%;
+}
+
+.social-icons i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bo;
+}
+
+
+
+.actions {
+  position: relative;
+}
+
+.cart-link {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-counter {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: var(--yellow);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 2px 6px;
+  line-height: 1;
+}
+
+
+
+#central{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#central img{
+  width:1600px;
+  height: auto;
+}

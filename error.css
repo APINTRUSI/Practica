@@ -1,0 +1,69 @@
+
+/*ADLaM Display*/
+@import url('https://fonts.googleapis.com/css2?family=ADLaM+Display&family=Arima:wght@100..700&family=Laila:wght@300;400;500;600;700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+
+:root {
+  --background-color: #fde6bc;
+  --side--bg-color: #FFEDBA;
+  --another--yellow: #FFE082;
+  --buttons-color: #F9C25A;
+  --text-color: #643515;
+  --orange: #D4750F;
+  --yellow: #DBAB26;
+  --font-main: ADLaM Display;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--font-main);
+    color: var(--text-color);
+}
+
+body{
+    background-color:#FCE9CC;
+}
+
+#logo {
+  position: absolute;
+  height: 71px;
+  width: auto;
+  left: 50px;
+  top: 30px;
+}
+
+#bg{
+    height: 785px;
+    width: auto;
+    display: flex;
+    justify-self: center;
+    align-self: center;
+}
+
+
+.go-back-btn {
+    background-color: #f4a829;
+    font-weight: bold;
+    font-size: 18px;
+    border: 2px solid var(--text-color);
+    border-radius: 8px;
+    padding: 5px 30px;
+    position: absolute;
+    top: 42%;
+    left: 790px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.go-back-btn:hover {
+  background-color: #e49720;
+}
+
+.go-back-btn:active {
+  transform: scale(0.96);
+}
+
+
+

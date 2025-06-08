@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign in</title>
+  <link rel="icon" href="Img/albina_stanga.png" type="image">
+  <link rel="stylesheet" href="sign_in.css" />
+  <link rel="stylesheet" href="general_headedr_footer.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+<header class="top-bar">
+  <div>
+    <a href="home.html"><img src="Img/logo.png" id="logo" alt="Book Hive Logo" /></a>
+  </div>
+</header>
+
+
+
+
+<div class="container">
+    <form class="signup-form">
+      <h1>Sign In</h1>
+
+      <label>Email address</label>
+      <input type="email" placeholder="Enter your email" required>
+
+      <label>Password</label>
+      <input type="password" placeholder="Enter password" required>
+
+      <div class="checkbox-container">
+        <a href="#" id = "da">Forgot password?</a>      
+      </div>
+
+      <button type="submit" class="submit-btn">Sign Up</button>
+
+      <p class="signin-link">Don't have an account? <a href="sign_up.html">Sign in</a></p>
+
+      <div class="social-buttons">
+        <a href="#" class="google-btn" id="sign_up_with"> <img src="https://img.icons8.com/color/16/000000/google-logo.png"/> Sign in with Google</a>
+        <a href="#" class="facebook-btn" id="sign_up_with"> <img src="https://img.icons8.com/color/16/000000/facebook-new.png" /> Sign in with Facebook</a>
+      </div>
+    </form>
+  </div>
+
+  <img src="Img/colt.png" alt="fag_colt" id="colt">
+  <img src="Img/albina_dreapta.png" alt="albina_dreapta" id="albina_dreapta">
+  <img src="Img/albina_stanga.png" alt="albina_stanga" id="albina_stanga">
+  <img src="Img/carte.png" alt="carte" id="carte">
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <footer id="footer">
+        <div class="final">
+            <h4>Copyright © 2025 Belîi. All rights reserved.</h4>
+        </div>
+    </footer>
+
+
+
+
+
+    <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const signupImg = document.getElementById('signup-img');
+    let toggled = false;
+
+    signupImg.addEventListener('click', function () {
+      toggled = !toggled;
+      signupImg.src = toggled ? 'Img/fag_2.png' : 'Img/fag.png';
+    });
+  });
+</script>
+
+</body>
+</html>

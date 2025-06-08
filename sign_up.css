@@ -1,0 +1,285 @@
+
+
+#logo {
+  position: absolute;
+  height: 71px;
+  width: auto;
+  left: 50px;
+  top: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.container {
+  display: flex;
+  justify-self: center;
+  background: #FFF3D5;
+  border: 4px solid #FDC760;
+  border-radius: 50px;
+  margin-top: 80px;
+  padding: 10px 70px 30px 70px;
+  width: 650px;
+  height: 630px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.signup-form h1 {
+  text-align: center;
+  margin-bottom: 5px;
+  font-size: 40px;
+}
+
+.signup-form label {
+  display: block;
+  margin: 4px 12px;
+  font-weight: bold;
+}
+
+.signup-form input[type="text"],
+.signup-form input[type="email"],
+.signup-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+    border: 3px solid #FDC760;
+  border-radius: 20px;
+  background-color: #FFF7D3;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  margin: 10px 0;
+}
+
+.checkbox-container input {
+  margin-right: 10px;
+  accent-color: #ffc658;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 8px;
+    background-color: var(--buttons-color);
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #ffb733;
+}
+
+.signin-link {
+  text-align: center;
+  font-size: 13px;
+  margin: 10px;
+}
+
+.signin-link a {
+  color: #4a2c00;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.social-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.google-btn,
+.facebook-btn {
+  
+    width: 230px;
+    padding: 10px;
+    border: 4px solid #FDC760;
+    border-radius: 20px;
+    background-color: #FFF7D3;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.google-btn img,
+.facebook-btn img {
+  vertical-align: middle;
+}
+
+
+
+.signup-form {
+  width: 600px; /* poți modifica această valoare (ex: 600px) */
+}
+
+
+
+
+#signup-img{
+  height: 15px;
+  width: auto;
+}
+
+
+
+
+
+
+
+
+
+
+#colt{
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 500px;
+  width: auto;
+}
+
+#albina_stanga{
+  position: absolute;
+  left: 380px;
+  top: 70px;
+  height: 200px;
+  width: auto;
+}
+
+#albina_dreapta{
+  position: absolute;
+  right: 250px;
+  bottom: 50px;
+  height: 290px;
+  width: auto;
+}
+
+#carte{
+  position: absolute;
+  left: 350px;
+  bottom: 0px;
+  height: 180px;
+  width: auto;
+}
+
+
+#sign_up_with{
+  cursor: pointer;
+  text-decoration: none;
+
+}
+
+
+
+
+
+
+
+
+
+
+footer{
+    background-image: linear-gradient(var(--white), var(--orange) );
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-image: linear-gradient(var(--background-color), #F8BF51);
+}
+
+.footer_info{
+    display: grid;
+    justify-content: center;
+    align-content: space-evenly;
+    margin-bottom: 15px;
+}
+
+
+.text h1{
+    font-family: "ADLaM Display";
+    font-size: 22px;
+    margin: 0px;
+}
+.text h6{
+    font-family: "ADLaM Display";
+    font-size: 11px;
+    margin: 0px;
+    opacity: 0.7;
+}
+
+
+
+
+footer h4{
+    font-family: "ADLaM Display";
+    font-size: 15px;
+    align-self: center;
+    justify-self: center;
+    font-weight: lighter;
+    margin: 0px;
+}
+.final{
+    display: flex;
+    gap: 255px;
+    justify-content: center;
+    align-items: center;
+}
+
+.newsletter{
+  gap: 10px;
+}
+
+
+
+#foloow{
+  display: flex;
+  justify-content: center;
+  align-self: center;
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.social-icons a {
+  position: relative;
+  display: inline-block;
+  width: auto;
+  height: 40px;
+}
+
+.social-icons img {
+  width: 100%;
+  height: 100%;
+}
+
+.social-icons i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bo;
+}

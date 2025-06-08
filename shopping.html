@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopping</title>
+  <link rel="icon" href="Img/albina_stanga.png" type="image">
+  <link rel="stylesheet" href="shopping.css" />
+  <link rel="stylesheet" href="general_headedr_footer.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="books.js"></script>
+</head>
+<body>
+
+<header class="top-bar">
+  <div>
+    <a href="home.html"><img src="Img/logo.png" id="logo" alt="Book Hive Logo" /></a>
+  </div>
+
+  <nav class="nav-menu">
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="shopping.html">Shopping</a></li>
+      <li><a href="https://help.pangobooks.com/en/">FAQ</a></li>
+      <li class="phone"><a href="tel:078074842"><i class="fa-solid fa-phone"></i> 078074842</a></li>
+    </ul>
+  </nav>
+
+  <div class="actions">
+    <a href="cart.html" class="cart-link">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span id="cart-counter" class="cart-counter">0</span>
+    </a>
+    <a href="error.html"><i class="fa-solid fa-heart"></i></a>
+    <a href="sign_in.html"><button class="login-btn">Log In</button></a>
+  </div>
+
+</header>
+
+<div id="shop-page">
+  <aside id="filters">
+    <!-- Categories -->
+    <div class="filter_section">
+      <h4>Categories</h4>
+      <div class="category_list" id="categoryButtons"></div>
+    </div>
+
+    <!-- Price filter -->
+    <div class="filter_section" id="price">
+      <h4>Filter by price</h4>
+      <div class="price_slider">
+        <div class="active_range"></div>
+        <input type="range" min="0" max="2000" value="0" id="price_min" />
+        <input type="range" min="0" max="2000" value="2000" id="price_max" />
+      </div>
+      <div class="price_inputs">
+        <input type="number" id="price_input_min" value="0" min="0" max="2000" />
+        <span> - </span>
+        <input type="number" id="price_input_max" value="2000" min="0" max="2000" />
+      </div>
+
+      <h4>Editura</h4>
+      <div class="category_list" id="publisherButtons"></div>
+    </div>
+  </aside>
+
+  <main id="products">
+    <div id="products_header">
+      <div class="search-container">
+        <input type="text" placeholder="Search..." class="search-input">
+        <button class="search-button">🔍</button>
+      </div>
+
+      <div class="filter_buttons">
+        <div class="select_wrapper">
+          <i class="fa fa-th-large"></i>
+          <select id="itemsPerPage" class="custom_select">
+            <option value="100">Show: 100</option>
+            <option value="52">Show: 52</option>
+            <option value="24">Show: 24</option>
+          </select>
+          <i class="fa fa-chevron-down chevron_icon"></i>
+        </div>
+
+        <div class="select_wrapper">
+          <i class="fa fa-filter"></i>
+          <select class="custom_select" id="sortOptions">
+            <option value="featured">Sort by: Featured</option>
+            <option value="price_low_high">Sort by: Price (Low to High)</option>
+            <option value="price_high_low">Sort by: Price (High to Low)</option>
+            <option value="rating">Sort by: Rating</option>
+          </select>
+          <i class="fa fa-chevron-down chevron_icon"></i>
+        </div>
+      </div>
+    </div>
+
+    <p class="items_found">We found <span class="highlight">0</span> items for you!</p>
+    <div class="product_grid" id="productGrid"></div>
+    <div id="pagination">
+
+    </div>
+  </main>
+
+
+  <img src="/Img/Decor.png" alt="Decor" id="Decor"/>
+
+  
+   
+</div> 
+  <footer id="footer">
+        <div class="footer_info">
+            <div class="newsletter">
+          <h1 id="foloow">Follow us</h1>
+          <div class="social-icons">
+            <a href="https://www.youtube.com/watch?v=kWB6PhByJ2s&list=LL&index=92"><img src="Img/fag.png" alt="Facebook" /><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.youtube.com/watch?v=aCU7o9sNy6E&list=RDaCU7o9sNy6E&start_radio=1"><img src="Img/fag.png" alt="Instagram" /><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.youtube.com/watch?v=pt2vZf5J5as&list=RDaCU7o9sNy6E&index=3"><img src="Img/fag.png" alt="Twitter" /><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://www.youtube.com/watch?v=s_nc1IVoMxc"><img src="Img/fag.png" alt="YouTube" /><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://www.youtube.com/watch?v=vhumOLNSSJY"><img src="Img/fag.png" alt="Pinterest" /><i class="fa-brands fa-pinterest"></i></a>
+          </div>
+        </div>
+        </div>
+        <div class="final">
+            <h4>Copyright © 2025 Belîi. All rights reserved.</h4>
+        </div>
+    </footer>
+<script>
+  const searchInput = document.querySelector('.search-input');
+  const container = document.getElementById("productGrid");
+  const categoryList = document.getElementById("categoryButtons");
+  const publisherList = document.getElementById("publisherButtons");
+  const sortSelect = document.getElementById("sortOptions");
+  const paginationContainer = document.getElementById("pagination");
+  const itemsPerPageSelect = document.getElementById("itemsPerPage");
+
+
+  const selectedCategories = new Set();
+  const selectedPublishers = new Set();
+
+  let currentPage = 1;
+  let itemsPerPage = parseInt(itemsPerPageSelect.value);
+
+let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+const cartIcon = document.querySelector('.fa-cart-shopping');
+const cartCounter = document.getElementById("cart-counter");
+cartIcon.parentElement.appendChild(cartCounter);
+updateCartCounter(); 
+
+
+
+  itemsPerPageSelect.addEventListener("change", () => {
+    itemsPerPage = parseInt(itemsPerPageSelect.value);
+    currentPage = 1;
+    applyAllFilters();
+  });
+
+  function sortBooks(booksArray, sortBy) {
+    switch (sortBy) {
+      case 'price_low_high':
+        return booksArray.slice().sort((a, b) => parseFloat(a.price.replace(/[^\d.]/g, '')) - parseFloat(b.price.replace(/[^\d.]/g, '')));
+      case 'price_high_low':
+        return booksArray.slice().sort((a, b) => parseFloat(b.price.replace(/[^\d.]/g, '')) - parseFloat(a.price.replace(/[^\d.]/g, '')));
+      case 'rating':
+        return booksArray.slice().sort((a, b) => (b.rating || 0) - (a.rating || 0));
+      default:
+        return booksArray;
+    }
+  }
+
+  function generateProductCards(booksArray) {
+    const sortedBooks = sortBooks(booksArray, sortSelect.value);
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const paginatedBooks = sortedBooks.slice(start, end);
+
+    container.innerHTML = "";
+    paginatedBooks.forEach(product => {
+      const card = document.createElement("div");
+      card.className = "product_card";
+      card.innerHTML = `
+      <div class="product_image"><img src="${product.image}" alt="${product.name}" /></div>
+      <h5 class="book_title">${product.name}</h5>
+      <h5 class="author">${product.author}</h5>
+      <div class="product_price">
+        <p class="price">${product.price}</p>
+        <button class="add_button" data-id="${product.id}">
+          <i class="fa-solid fa-cart-shopping"></i> Add
+        </button>
+      </div>`;
+      
+      
+      container.appendChild(card);
+
+      const addButton = card.querySelector('.add_button');
+      addButton.addEventListener('click', () => {
+  const id = addButton.getAttribute('data-id');
+  const selectedProduct = books.find(b => b.id == id);
+
+  if (selectedProduct) {
+    const existingItem = cartItems.find(item => item.id == id);
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      cartItems.push({ ...selectedProduct, quantity: 1 });
+    }
+
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    updateCartCounter();
+  }
+});
+
+    });
+
+const cards = document.querySelectorAll('.product_card');
+
+cards.forEach(div => {
+  div.addEventListener('click', (e) => {
+    // Evită declanșarea evenimentului dacă s-a apăsat pe butonul "Add"
+    if (e.target.closest('.add_button')) return;
+
+    const id = div.querySelector('.add_button').getAttribute('data-id');
+    localStorage.setItem('book_id_selected', id);
+    window.location.href = 'product.html';
+  });
+});
+
+
+
+const decorImage = document.getElementById("Decor");
+if (paginatedBooks.length < 16) {
+  decorImage.style.display = "none";
+} else {
+  decorImage.style.display = "block";
+}
+
+    
+  }
+
+function generatePagination(totalItems) {
+  paginationContainer.innerHTML = "";
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  
+  if (totalPages <= 1) return;
+
+  for (let i = 1; i <= totalPages; i++) {
+    const link = document.createElement("a");
+    link.href = "#";
+    link.className = "hex-link";
+    if (i === currentPage) link.classList.add("active");
+
+    link.innerHTML = `
+      <img src="Img/${i === currentPage ? 'fag_2' : 'fag'}.png" alt="hex" />
+      <span>${i}</span>
+    `;
+
+    link.addEventListener("click", (e) => {
+      e.preventDefault(); // prevenim scroll-ul
+      currentPage = i;
+      applyAllFilters();
+    });
+
+    paginationContainer.appendChild(link);
+  }
+}
+
+
+  function countTotalItems(booksArray) {
+    document.querySelector('.items_found .highlight').textContent = booksArray.length;
+  }
+
+  function applyAllFilters() {
+    const minPrice = parseInt(document.getElementById("price_input_min").value) || 0;
+    const maxPrice = parseInt(document.getElementById("price_input_max").value) || Infinity;
+    const searchTerm = searchInput.value.trim().toLowerCase();
+
+    const filtered = books.filter(book => {
+      const price = parseFloat(book.price.replace(/[^\d.]/g, ''));
+      const categoryMatch = selectedCategories.size === 0 || selectedCategories.has(book.category);
+      const publisherMatch = selectedPublishers.size === 0 || selectedPublishers.has(book.publisher);
+      const priceMatch = price >= minPrice && price <= maxPrice;
+      const searchMatch = book.name.toLowerCase().includes(searchTerm);
+
+      return categoryMatch && publisherMatch && priceMatch && searchMatch;
+    });
+
+    countTotalItems(filtered);
+    generatePagination(filtered.length);
+    generateProductCards(filtered);
+  }
+
+  function generateCategoryButtons() {
+    const counts = {};
+    books.forEach(book => {
+      counts[book.category] = (counts[book.category] || 0) + 1;
+    });
+
+    categoryList.innerHTML = "";
+    for (const category in counts) {
+      const button = document.createElement("button");
+      button.className = "category_item";
+      button.setAttribute("data-category", category);
+      button.innerHTML = `
+        <span>${category}</span>
+        <div class="badge">
+          <img src="Img/fag.png" />
+          <span class="category_count">${counts[category]}</span>
+        </div>`;
+
+      button.addEventListener("click", () => {
+        const img = button.querySelector("img");
+        if (selectedCategories.has(category)) {
+          selectedCategories.delete(category);
+          img.src = "Img/fag.png";
+        } else {
+          selectedCategories.add(category);
+          img.src = "Img/fag_2.png";
+        }
+        currentPage = 1;
+        applyAllFilters();
+      });
+
+      categoryList.appendChild(button);
+    }
+  }
+
+  function generatePublisherButtons() {
+    const publishers = [...new Set(books.map(book => book.publisher))];
+    publisherList.innerHTML = "";
+
+    publishers.forEach(publisher => {
+      const button = document.createElement("button");
+      button.className = "category_item_2";
+      button.setAttribute("data-editura", publisher);
+      button.innerHTML = `
+        <div class="badge"><img src="Img/fag.png" /></div><span>${publisher}</span>`;
+
+      button.addEventListener("click", () => {
+        const img = button.querySelector("img");
+        if (selectedPublishers.has(publisher)) {
+          selectedPublishers.delete(publisher);
+          img.src = "Img/fag.png";
+        } else {
+          selectedPublishers.add(publisher);
+          img.src = "Img/fag_2.png";
+        }
+        currentPage = 1;
+        applyAllFilters();
+      });
+
+      publisherList.appendChild(button);
+    });
+  }
+
+  // Price slider
+  const minRange = document.getElementById("price_min");
+  const maxRange = document.getElementById("price_max");
+  const minInput = document.getElementById("price_input_min");
+  const maxInput = document.getElementById("price_input_max");
+  const activeRange = document.querySelector(".active_range");
+
+  function updateRange() {
+    const min = parseInt(minRange.min);
+    const max = parseInt(maxRange.max);
+    const valMin = parseInt(minRange.value);
+    const valMax = parseInt(maxRange.value);
+    const percentMin = ((valMin - min) / (max - min)) * 100;
+    const percentMax = ((valMax - min) / (max - min)) * 100;
+    activeRange.style.left = percentMin + "%";
+    activeRange.style.width = (percentMax - percentMin) + "%";
+  }
+
+  minInput.addEventListener("input", () => {
+    let val = Math.min(parseInt(minInput.value), parseInt(maxInput.value));
+    minRange.value = val;
+    minInput.value = val;
+    updateRange();
+    currentPage = 1;
+    applyAllFilters();
+  });
+
+  maxInput.addEventListener("input", () => {
+    let val = Math.max(parseInt(maxInput.value), parseInt(minInput.value));
+    maxRange.value = val;
+    maxInput.value = val;
+    updateRange();
+    currentPage = 1;
+    applyAllFilters();
+  });
+
+  minRange.addEventListener("input", () => {
+    if (parseInt(minRange.value) > parseInt(maxRange.value)) {
+      minRange.value = maxRange.value;
+    }
+    minInput.value = minRange.value;
+    updateRange();
+    currentPage = 1;
+    applyAllFilters();
+  });
+
+  maxRange.addEventListener("input", () => {
+    if (parseInt(maxRange.value) < parseInt(minRange.value)) {
+      maxRange.value = minRange.value;
+    }
+    maxInput.value = maxRange.value;
+    updateRange();
+    currentPage = 1;
+    applyAllFilters();
+  });
+
+  searchInput.addEventListener('input', () => {
+    currentPage = 1;
+    applyAllFilters();
+  });
+
+  sortSelect.addEventListener('change', () => {
+    currentPage = 1;
+    applyAllFilters();
+  });
+
+  window.addEventListener("DOMContentLoaded", () => {
+    generateCategoryButtons();
+    generatePublisherButtons();
+    applyAllFilters();
+    updateRange();
+  });
+
+
+
+  function updateCartCounter() {
+  const totalQuantity = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
+  cartCounter.textContent = totalQuantity;
+  cartCounter.style.display = totalQuantity > 0 ? 'inline-block' : 'none';
+}
+
+
+
+</script>
+
+
+</body>
+</html>

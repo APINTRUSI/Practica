@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product</title>
+  <link rel="icon" href="Img/albina_stanga.png" type="image">
+  <link rel="stylesheet" href="product.css" />
+  <link rel="stylesheet" href="general_headedr_footer.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="books.js"></script>
+</head>
+<body>
+
+<img src="Img/product_left.png" id="product_left">
+<img src="Img/product_right.png" id="product_right">
+<img src="Img/center.png" id="center">
+<img src="Img/jos_decor_prim.png" id="jos_decor_prim">
+<img src="Img/2.png" id="a2">
+<img src="Img/3.png" id="a3">
+<img src="Img/4.png" id="a4">
+
+
+
+<header class="top-bar">
+  <div>
+    <a href="home.html"><img src="Img/logo.png" id="logo" alt="Book Hive Logo" /></a>
+  </div>
+  <nav class="nav-menu">
+    <ul>
+      <li><a href="home.html">Home</a></li>
+      <li><a href="shopping.html">Shopping</a></li>
+      <li><a href="https://help.pangobooks.com/en/">FAQ</a></li>
+      <li class="phone"><a href="tel:078074842"><i class="fa-solid fa-phone"></i> 078074842</a></li>
+    </ul>
+  </nav>
+  <div class="actions">
+    <a href="cart.html" class="cart-link">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span id="cart-counter" class="cart-counter">0</span>
+    </a>
+    <a href="error.html"><i class="fa-solid fa-heart"></i></a>
+    <a href="sign_in.html"><button class="login-btn">Log In</button></a>
+  </div>
+</header>
+
+<main class="container">
+  <section id="product-section" class="product-section"></section>
+
+  <section id="other_products" class="other_products">
+    <div class="similar_products" id="similar_products">
+      <h5>Similar products</h5>
+      <div id="book_list1" class="book_list"></div>
+    </div>
+    <div class="new_Release" id="new_Release">
+      <h5>New releases</h5>
+      <div id="book_list2" class="book_list"></div>
+    </div>
+  </section>
+</main>
+
+<footer id="footer">
+  <div class="footer_info">
+    <div class="newsletter">
+      <h1 id="foloow">Follow us</h1>
+      <div class="social-icons">
+        <a href="#"><img src="Img/fag.png" alt="Facebook" /><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#"><img src="Img/fag.png" alt="Instagram" /><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><img src="Img/fag.png" alt="Twitter" /><i class="fa-brands fa-twitter"></i></a>
+        <a href="#"><img src="Img/fag.png" alt="YouTube" /><i class="fa-brands fa-youtube"></i></a>
+        <a href="#"><img src="Img/fag.png" alt="Pinterest" /><i class="fa-brands fa-pinterest"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="final">
+    <h4>Copyright © 2025 Belîi. All rights reserved.</h4>
+  </div>
+</footer>
+
+
+<script>
+  const storedId = localStorage.getItem("book_id_selected");
+  const product = books.find(b => b.id == storedId);
+
+  if (product) {
+    document.getElementById("product-section").innerHTML = `
+      <div class="product-image">
+        <img src="${product.image}" alt="${product.name}">
+      </div>
+      <div class="product-details">
+        <h1>${product.name}</h1>
+        <h2>${product.author}</h2>
+        <p class="rating">${"⭐".repeat(product.rating)} <span>(${product.ratingCount})</span></p>
+        <p class="price">${product.price}</p>
+        <p class="description">${product.description}</p>
+        <div class="quantityAndAddToCart">
+          <div class="quantity">
+            <button onclick="updateQuantity(-1)">-</button>
+            <span id="quantity">1</span>
+            <button onclick="updateQuantity(1)">+</button>
+          </div>
+          <button class="add-to-cart" onclick="addToCart(${product.id})">Add to cart</button>
+        </div>
+      </div>
+    `;
+  } else {
+    document.getElementById("product-section").innerHTML = `<p>Product not found.</p>`;
+  }
+
+  function updateQuantity(change) {
+    const quantityEl = document.getElementById("quantity");
+    let quantity = parseInt(quantityEl.textContent);
+    quantity = Math.max(1, quantity + change);
+    quantityEl.textContent = quantity;
+  }
+
+  function addToCart(id, qty = null) {
+    const quantity = qty ?? parseInt(document.getElementById("quantity")?.textContent || "1");
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const existingItem = cartItems.find(item => item.id == id);
+    if (existingItem) {
+      existingItem.quantity += quantity;
+    } else {
+      const productToAdd = books.find(b => b.id == id);
+      cartItems.push({ ...productToAdd, quantity });
+    }
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    updateCartCounter1();
+  }
+
+  function updateCartCounter1() {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+    const totalQuantity = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
+    const cartCounter = document.getElementById("cart-counter");
+    cartCounter.textContent = totalQuantity;
+    cartCounter.style.display = totalQuantity > 0 ? 'inline-block' : 'none';
+  }
+
+  function getRandomBooks(books, count) {
+    const shuffled = [...books].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, count);
+  }
+
+  function displayBookByCategory(books, count = 4) {
+    const sameCategoryBooks = books.filter(book => book.category === product.category && book.id !== product.id);
+    const selectedBooks = getRandomBooks(sameCategoryBooks, count);
+    const container = document.getElementById('book_list1');
+    container.innerHTML = '';
+
+    selectedBooks.forEach(book => {
+      const card = document.createElement("div");
+      card.className = "product_card";
+      card.innerHTML = `
+        <div class="product_image"><img src="${book.image}" alt="${book.name}" /></div>
+        <h5 class="book_title">${book.name}</h5>
+        <h5 class="author">${book.author}</h5>
+        <div class="product_price">
+          <p class="price">${book.price}</p>
+          <button class="add_button" data-id="${book.id}">
+            <i class="fa-solid fa-cart-shopping"></i> Add
+          </button>
+        </div>`;
+      container.appendChild(card);
+    });
+  }
+
+  function displayRandomBooks(books, count = 4) {
+    const selectedBooks = getRandomBooks(books, count);
+    const container = document.getElementById('book_list2');
+    container.innerHTML = '';
+
+    selectedBooks.forEach(book => {
+      const card = document.createElement("div");
+      card.className = "product_card";
+      card.innerHTML = `
+        <div class="product_image"><img src="${book.image}" alt="${book.name}" /></div>
+        <h5 class="book_title">${book.name}</h5>
+        <h5 class="author">${book.author}</h5>
+        <div class="product_price">
+          <p class="price">${book.price}</p>
+          <button class="add_button" data-id="${book.id}">
+            <i class="fa-solid fa-cart-shopping"></i> Add
+          </button>
+        </div>`;
+      container.appendChild(card);
+    });
+  }
+
+  // Inițializare
+  displayBookByCategory(books);
+  displayRandomBooks(books);
+  updateCartCounter1();
+
+  // Activează butoanele Add
+  setTimeout(() => {
+  document.querySelectorAll(".product_card").forEach(card => {
+    const addButton = card.querySelector(".add_button");
+    const id = parseInt(addButton.getAttribute("data-id"));
+
+    // Click pe card (în afară de butonul Add)
+    card.addEventListener("click", (e) => {
+      if (!e.target.closest("button")) {
+        localStorage.setItem("book_id_selected", id);
+        window.location.href = "product.html";
+      }
+    });
+
+    // Click doar pe butonul Add
+    addButton.addEventListener("click", (e) => {
+      e.stopPropagation(); // prevenim declanșarea clickului pe card
+      addToCart(id, 1);
+    });
+  });
+}, 100);
+
+</script>
+
+
+
+</body>
+</html>
